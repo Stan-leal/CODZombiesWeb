@@ -1,0 +1,48 @@
+@page
+@model CODZombiesWeb.Pages_Maps.IndexModel
+
+@{
+    ViewData["Title"] = "Map List";
+}
+
+<h1>Maps</h1>
+
+<p>
+    <a asp-page="./Create">Create New</a>
+</p>
+
+
+<div class="row mb-3">
+    <form class="d-flex" role="search" asp-page="./Index" method="get">
+        <div class="col-4">
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <input class="form-control me-2" type="search" name="CurrentSearch" value="@Model.CurrentSearch" placeholder="Search by Map Name" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Map[0].MapName)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Map)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.MapName)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.MapID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.MapID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.MapID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
